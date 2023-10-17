@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;1,6..12,200&display=swap');
+
+.contentFriend,
+.homeContent {
+    display: inline-block;
+    padding: 10px;
+    font-family: 'Nunito Sans', sans-serif;
+    height: 100%;
+}
+
+.homeContent {
+    width: 70%;
+    margin: 10px;
+}
+
+.contentFriend {
+    width: 25%;
+}
+
+.subSectionTittle {
+    color: #285CA0;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 28px;
+}
+
+.contentFriend h1 {
+    color: #285CA0;
+}
+
+.logoFriendImg {
+    display: inline-block;
+    width: 50px; 
+    height: 50px;
+}
+
+.postBlock {
+    display: block;
+    border: #285CA0 2px solid;
+    margin: 5px;
+    padding: 10px;
+}
+
+.friendUsername {
+    display: inline-block;
+    font-size: 15px;
+}
+
+.friendBox {
+    border: #285CA0 2px solid;
+    margin: 3px;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+}
+
+.recommendedUser {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.userNameBlockPost {
+    display: flex;
+    align-items: center;
+}
