@@ -4,73 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="---AA-Compatible" content="IE=edge">
     <meta name= "viewport" content= "width-device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Home</title>
     <link rel="stylesheet" href="/index.css">
 </head>
 <body>
-    <%- include('./partials/header.ejs') %>
+
+    <img src="/image/logo.png" class="logInFormLogo">
 
 
-    <div class="homeContent">
-        <h1 class="subSectionTittle">Post's</h1>
+    <div class="logInForm">
 
-        <div class="postBlock">
-            <div class="userNameBlockPost">
-                <img src="/image/user.png" class="logoFriendImg">
-                <p class="friendUsername">Username</p>
-            </div>
+        <h1>Log In</h1>
 
-            <p>
-                Texto de entry del usuario de arriba.
-            </p>
-            
-        </div>
+        <a href="/register">
+            <button class="registerButton">Register</button>
+        </a>
 
-        <div class="postBlock">
-            <div class="userNameBlockPost">
-                <img src="/image/user.png" class="logoFriendImg">
-                <p class="friendUsername">Username</p>
-                <p class="recommendedUser">[Recommended User]</p>
-            </div>
-
-            <p>
-                Texto de entry del usuario de arriba.
-            </p>
-            
-        </div>
-
-        <div class="postBlock">
-            <div class="userNameBlockPost">
-                <img src="/image/user.png" class="logoFriendImg">
-                <p class="friendUsername">Username</p>
-            </div>
-
-            <p>
-                Texto de entry del usuario de arriba.
-            </p>
-            
-        </div>
+        <form>
+            <label>Username: </label>
+            <input type="text" name="friendName" placeholder="Username">
     
-    </div>
+            <label>Password: </label>
+            <input type="text" name="friendName" placeholder="Password">
 
-    <div class="contentFriend">
-        <h1 class="subSectionTittle">Friend's</h1>
-        
-        <div class="friendBox">
-            <img src="/image/user.png" class="logoFriendImg">
-            <p class="friendUsername">Username</p>
-        </div>
-
-        <h1 class="subSectionTittle">You might know</h1>
-        
-        <div class="friendBox">
-            <img src="/image/user.png" class="logoFriendImg">
-            <p class="friendUsername">Username</p>
-        </div>
+            <button type="submit" class="logInButton">LogIn</button>
+        </form>
 
     </div>
-
-
 
 </body>
 </html>

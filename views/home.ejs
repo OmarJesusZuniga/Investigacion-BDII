@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="---AA-Compatible" content="IE=edge">
+    <meta name= "viewport" content= "width-device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+
+    <div class="homeContent">
+        <h1 class="subSectionTittleMain">Post's</h1>
+
+        <a href="/addWave">
+            <button>Add a Wave</button>
+        </a>
+
+        <div class="postBlock">
+            <div class="userNameBlockPost">
+                <img src="/image/user.png" class="logoFriendImg">
+                <p class="postUsername">Username</p>
+            </div>
+
+            <div class="waveTheme">
+                <p class="waveContent">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In hac habitasse platea dictumst. Sed et hendrerit arcu. Nulla facilisi. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc non risus ac urna consectetur vehicula at in urna. Maecenas id urna non arcu vestibulum eleifend a sit amet justo. Cras auctor justo id quam facilisis, id tincidunt libero euismod. Nunc ultricies interdum nisi id cursus. Fusce hendrerit, ante at lacinia iaculis, justo elit dignissim ligula, ac feugiat nisl justo non neque. Vivamus vitae odio ut libero efficitur lacinia. Quisque tincidunt lacus eget purus venenatis, ac tempor dolor rhoncus.
+                </p>
+            </div>
+            
+        </div>
+
+        <div class="postBlock">
+            <div class="userNameBlockPost">
+                <img src="/image/user.png" class="logoFriendImg">
+                <p class="postUsername">Username</p>
+                <p class="recommendedUser">[ Recommended User ]</p>
+            </div>
+
+            <p>
+                Texto de entry del usuario de arriba.
+            </p>
+            
+        </div>
+
+        <div class="postBlock">
+            <div class="userNameBlockPost">
+                <img src="/image/user.png" class="logoFriendImg">
+                <p class="postUsername">Username</p>
+            </div>
+
+            <p>
+                Texto de entry del usuario de arriba.
+            </p>
+            
+        </div>
+    
+    </div>
+
+    <div class="contentFriend">
+        <h1 class="subSectionTittle">Friend's</h1>
+        
+        <div class="friendBox">
+            <img src="/image/user.png" class="logoFriendImg">
+            <p class="friendUsername">Username</p>
+        </div>
+
+        <div class="friendBox">
+            <img src="/image/user.png" class="logoFriendImg">
+            <p class="friendUsername">Username</p>
+        </div>
+
+        <h1 class="subSectionTittle">You might know</h1>
+        
+        <div class="friendBox">
+            <img src="/image/user.png" class="logoFriendImg">
+            <p class="friendUsername">Username</p>
+            <button class="addNewRecommendedFriendButton">Add Friend</button>
+        </div>
+
+        <div class="friendBox">
+            <img src="/image/user.png" class="logoFriendImg">
+            <p class="friendUsername">Username</p>
+            <button class="addNewRecommendedFriendButton">Add Friend</button>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>

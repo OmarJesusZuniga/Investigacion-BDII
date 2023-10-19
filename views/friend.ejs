@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="---AA-Compatible" content="IE=edge">
+    <meta name= "viewport" content= "width-device-width, initial-scale=1.0">
+    <title>Friend's</title>
+    <link rel="stylesheet" href="/friend.css">
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+
+    <div class="homeContent">
+        <div class="friendRequestsDiv">
+            <div class="friendContent">
+                <h1 class="subSectionTittle">Send Friend Request</h1>
+
+                <form class="searchFriendBox">
+                    <input type="text" name="friendName" placeholder="Enter friend's username">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+
+            <div class="friendContent">
+                <h1 class="subSectionTittle">Friend Request's</h1>
+
+                <div class="friendBox">
+                    <img src="/image/user.png" class="logoFriendImg">
+                    <p class="friendUsername">Username</p>
+                    <div class="friendRequestButtons">
+                        <button class="rejectButtonFriend">Reject</button>
+                        <button class="acceptButtonFriend">Accept</button>
+                    </div>
+                </div>
+
+                <div class="friendBox">
+                    <img src="/image/user.png" class="logoFriendImg">
+                    <p class="friendUsername">Username</p>
+                    <div class="friendRequestButtons">
+                        <button class="rejectButtonFriend">Reject</button>
+                        <button class="acceptButtonFriend">Accept</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="friendContent">
+                <h1 class="subSectionTittle">Request's Send</h1>
+
+                <div class="friendBox">
+                    <img src="/image/user.png" class="logoFriendImg">
+                    <p class="friendUsername">Username</p>
+                    <div class="friendRequestButtons">
+                        <button class="rejectButtonFriend">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="friendBox">
+                    <img src="/image/user.png" class="logoFriendImg">
+                    <p class="friendUsername">Username</p>
+                    <div class="friendRequestButtons">
+                        <button class="rejectButtonFriend">Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="contentFriend">
+        <h1 class="subSectionTittle">Friend's</h1>
+        
+        <div class="friendBox">
+            <img src="/image/user.png" class="logoFriendImg">
+            <p class="friendUsername">Username</p>
+            <button class="rejectButtonFriend">Remove Friend</button>
+        </div>
+
+        <div class="friendBox">
+            <img src="/image/user.png" class="logoFriendImg">
+            <p class="friendUsername">Username</p>
+            <button class="rejectButtonFriend">Remove Friend</button>
+        </div>
+
+        <h1 class="subSectionTittle">You might know</h1>
+        
+        <div class="friendBox">
+            <img src="/image/user.png" class="logoFriendImg">
+            <p class="friendUsername">Username</p>
+            <button class="addNewRecommendedFriendButton">Add Friend</button>
+        </div>
+
+        <div class="friendBox">
+            <img src="/image/user.png" class="logoFriendImg">
+            <p class="friendUsername">Username</p>
+            <button class="addNewRecommendedFriendButton">Add Friend</button>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>

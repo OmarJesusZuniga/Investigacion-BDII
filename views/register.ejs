@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="---AA-Compatible" content="IE=edge">
+    <meta name= "viewport" content= "width-device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/register.css">
+</head>
+<body>
+
+    <img src="/image/logo.png" class="logInFormLogo">
+
+
+    <div class="logInForm">
+
+        <h1>Register</h1>
+
+        <a href="/">
+            <button class="cancelRegisterButton">Cancel</button>
+        </a>
+
+        <form>
+            <label>Username: </label>
+            <input type="text" name="friendName" placeholder="New Username" required> 
+    
+            <label>Mail: </label>
+            <input type="text" name="friendName" placeholder="New Username" required>
+
+            <label>Password: </label>
+            <input type="password" name="friendName" id="passwordInput" placeholder="New Password" class="passwordFont" required>
+            <button type="button" id="togglePassword" class="toggleViewPassword">
+                <img src="/image/view.png" class="imageviewIcon">
+            </button>
+        
+            <label>Date of Birth: </label>
+            <input type="date" name="dateOfBirth" placeholder="Select your birthdate" required>
+
+            <button type="submit" class="logInButton">Register</button>
+        </form>
+
+    </div>
+
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('passwordInput');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+    </script>
+
+</body>
+</html>

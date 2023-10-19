@@ -73,12 +73,32 @@ label {
     margin-right: 10px;
 }
 
-.registerButton {
-    background-color: #EE9322;
+.cancelRegisterButton {
+    background-color: #C70039;
 }
 
-.registerButton:hover {
-    background-color: #E9B824;
+.cancelRegisterButton:hover {
+    background-color: #FF6969;
 }
 
+form {
+    position: relative;
+}
 
+.toggleViewPassword {
+    position: absolute;
+    right: 30px; /* Adjust the button's position as needed */
+    top: 57%;
+    transform: translateY(-50%);
+    padding: 5px;
+    background: none;
+}
+
+.toggleViewPassword:hover {
+    background: none;
+}
+
+.imageviewIcon {
+    width: 25px;
+    height: auto;
+}
