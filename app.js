@@ -1,6 +1,15 @@
 const express = require('express');
 
-let currUser;
+class Person {
+  constructor(email, username, password, birthdate) {
+      this.email = email;
+      this.username = username;
+      this.password = password;
+      this.birthdate = birthdate;
+  }
+}
+
+let currUser = new Person();
 
 const path = require('path');
 var neo4j = require('neo4j-driver');
@@ -44,7 +53,7 @@ app.get('/friend', function (req, res) {
 });
 
 app.get('/account', function (req, res) {
-  res.render('account');
+  res.render('account', {person : currUser});
 });
 
 app.post('/register/addPerson', function(req, res) {
@@ -92,9 +101,15 @@ app.post('/getPerson', function(req, res) {
     .then(function(result){
       if (result.records.length > 0) {
         const record = result.records[0]; // Get the first record from the records array
-        currUser =  result.records[0].get('n');
+        const node = record.get('n'); // Get the node
+        
+        currUser.email = node.properties.email;
+        currUser.password = node.properties.password;
+        currUser.birthdate = node.properties.birthDate;
+        currUser.username = node.properties.username;
+        
         res.redirect('/account');
-      } else {
+    } else {
         // Handle case where no matching user is found
         console.log("Invalid user");
 
@@ -105,6 +120,30 @@ app.post('/getPerson', function(req, res) {
       console.log(err);
       res.status(500).send("Error occurred");
     });
+});
+
+app.post('/modifyAccount', function(req,res){
+  
+      const dataNeo = {
+          oldEmailParam: currUser.email,
+          emailParam: req.body.email,
+          passwordParam: req.body.password,
+          usernameParam: req.body.username,
+          secondNameParam: req.body.dateOfBirth
+      }
+      session 
+      .run(`MATCH (p:Person {email: $oldEmailParam})
+      SET p.email = $emailParam,
+      p.password = $passwordParam, 
+      p.userame = $usernameParam, 
+      p.birthDate = $birthDateParam
+      RETURN p`, dataNeo)
+      .then(result =>{
+          res.render('/account')
+      })
+      .catch (err => {
+       console.log(err);
+      })
 });
 
 app.listen(3000, () => {

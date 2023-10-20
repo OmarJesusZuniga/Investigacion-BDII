@@ -22,27 +22,19 @@
 
         <form action="/register/addPerson" method="POST">
             <label>Username: </label>
-            <p>
-                <input type="text" name="username" placeholder="Your username" required> 
-            </p>
+            <input type="text" name="username" placeholder="Your username" required> 
                 
             <label>Mail: </label>
-            <p>
-                <input type="text" name="email" placeholder="Your email address" required>
-            </p>
+            <input type="text" name="email" placeholder="Your email address" required>
             
             <label>Password: </label>
-            <p>
                 <input type="password" name="password" id="passwordInput" placeholder="New Password" class="passwordFont" required>
                 <button type="button" id="togglePassword" class="toggleViewPassword">
                     <img src="/image/view.png" class="imageviewIcon">
                 </button>
-            </p>
         
             <label>Date of Birth: </label>
-            <p>
-                <input type="date" name="dateOfBirth" placeholder="Select your birthdate" required>
-            </p>
+            <input type="date" name="dateOfBirth" placeholder="Select your birthdate" required>
             
 
             <button type="submit" class="logInButton">Register</button>

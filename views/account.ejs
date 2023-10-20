@@ -18,21 +18,21 @@
         </a>
     </div>
 
-    <form class="accountInformation Division">
+    <form action="/modifyAccount" method="post" class="accountInformation Division">
         <label>Username: </label>
-        <input type="text" name="friendName" placeholder="New Username" required>
+        <input type="text" name="username" value="<%= person.username%>" placeholder="New Username" required>
     
         <label>Mail: </label>
-        <input type="text" name="friendName" placeholder="New Username" required>
+        <input type="text" name="email" value="<%= person.email%>" placeholder="New email" required>
 
         <label>Password: </label>
-        <input type="password" name="friendName" id="passwordInput" placeholder="New Password" required>
+        <input type="password" name="password" value="<%= person.password%>" id="passwordInput" placeholder="New Password" required>
         <button type="button" id="togglePassword" class="toggleViewPassword">
             <img src="/image/view.png" class="imageviewIcon">
         </button>
     
         <label>Date of Birth: </label>
-        <input type="date" name="dateOfBirth" placeholder="Select your birthdate" required>
+        <input type="date" name="dateOfBirth" value="<%= person.birthdate%>" placeholder="Select your birthdate" required>
     
         <button type="submit" class="updateInformationButton">Update Information</button>
     </form>    
