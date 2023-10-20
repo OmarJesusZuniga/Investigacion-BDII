@@ -20,21 +20,30 @@
             <button class="cancelRegisterButton">Cancel</button>
         </a>
 
-        <form>
+        <form action="/register/addPerson" method="POST">
             <label>Username: </label>
-            <input type="text" name="friendName" placeholder="New Username" required> 
-    
+            <p>
+                <input type="text" name="username" placeholder="Your username" required> 
+            </p>
+                
             <label>Mail: </label>
-            <input type="text" name="friendName" placeholder="New Username" required>
-
+            <p>
+                <input type="text" name="email" placeholder="Your email address" required>
+            </p>
+            
             <label>Password: </label>
-            <input type="password" name="friendName" id="passwordInput" placeholder="New Password" class="passwordFont" required>
-            <button type="button" id="togglePassword" class="toggleViewPassword">
-                <img src="/image/view.png" class="imageviewIcon">
-            </button>
+            <p>
+                <input type="password" name="password" id="passwordInput" placeholder="New Password" class="passwordFont" required>
+                <button type="button" id="togglePassword" class="toggleViewPassword">
+                    <img src="/image/view.png" class="imageviewIcon">
+                </button>
+            </p>
         
             <label>Date of Birth: </label>
-            <input type="date" name="dateOfBirth" placeholder="Select your birthdate" required>
+            <p>
+                <input type="date" name="dateOfBirth" placeholder="Select your birthdate" required>
+            </p>
+            
 
             <button type="submit" class="logInButton">Register</button>
         </form>

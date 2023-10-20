@@ -20,13 +20,16 @@
             <button class="registerButton">Register</button>
         </a>
 
-        <form>
-            <label>Username: </label>
-            <input type="text" name="friendName" placeholder="Username">
+        <form action="/getPerson" method="POST">
+            <label>Email: </label>
+            <p>
+                <input type="text" name="email" placeholder="Email">
+            </p>
     
             <label>Password: </label>
-            <input type="text" name="friendName" placeholder="Password">
-
+            <p>
+                <input type="text" name="friendName" placeholder="Password">
+            </p>
             <button type="submit" class="logInButton">LogIn</button>
         </form>
 
