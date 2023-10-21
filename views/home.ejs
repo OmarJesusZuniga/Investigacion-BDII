@@ -60,31 +60,22 @@
     </div>
 
     <div class="contentFriend">
-        <h1 class="subSectionTittle">Friend's</h1>
-        
-        <div class="friendBox">
-            <img src="/image/user.png" class="logoFriendImg">
-            <p class="friendUsername">Username</p>
-        </div>
-
-        <div class="friendBox">
-            <img src="/image/user.png" class="logoFriendImg">
-            <p class="friendUsername">Username</p>
-        </div>
-
         <h1 class="subSectionTittle">You might know</h1>
         
-        <div class="friendBox">
-            <img src="/image/user.png" class="logoFriendImg">
-            <p class="friendUsername">Username</p>
-            <button class="addNewRecommendedFriendButton">Add Friend</button>
-        </div>
-
-        <div class="friendBox">
-            <img src="/image/user.png" class="logoFriendImg">
-            <p class="friendUsername">Username</p>
-            <button class="addNewRecommendedFriendButton">Add Friend</button>
-        </div>
+        <% if (recommendedList.length > 0) {%>
+            <% recommendedList.forEach(user => { %>
+                <div class="friendBox">
+                    <img src="/image/user.png" class="logoFriendImg">
+                    <p class="friendUsername"><%= user.get('to').properties.username %></p>
+                    <form action="/sendFriendRequest" method="POST">
+                        <input type="hidden" name="friendName" value="<%= user.get('to').properties.username %>">
+                        <button class="addNewRecommendedFriendButton">Add Friend</button>
+                    </form>
+                </div>
+            <% }) %>
+        <%} else { %> 
+            <h2 class="requestsUsers">No recommendations</h2>
+        <%} %>
 
     </div>
 
