@@ -48,8 +48,38 @@ app.get('/about', function (req, res) {
     res.render('about');
 });
 
-app.get('/friend', function (req, res) {
-  res.render('friend');
+app.get('/friend', (req, res) =>{
+  session 
+  .run(`MATCH (from:Person)-[r:REQUEST]->(to:Person{email: $emailParam})
+  RETURN from`, {
+  emailParam : currUser.email,
+  })
+  .then((result) =>{
+      var friendRequests = result.records;
+      session
+      .run(`MATCH (from:Person)-[r:FRIENDS]->(to:Person{email: $emailFriendParam})
+      RETURN from`, {
+          emailFriendParam : currUser.email,
+      })
+      .then((result) =>{
+          var friendsList = result.records;
+          session
+          .run(`MATCH (from:Person {email: $emailParam})-[r:SENT_REQUEST]->(to:Person)
+          RETURN from, to;`, {
+            emailParam : currUser.email,
+          })
+          .then((result) => {
+            res.render('friend', {friendRequests, friendsList, requestsList: result.records})
+          })
+          
+      })
+      .catch((err) => {
+          console.log(err)
+      })
+  })
+  .catch((err) =>{
+     console.log(err)
+  })
 });
 
 app.get('/account', function (req, res) {
@@ -78,7 +108,7 @@ app.post('/register/addPerson', function(req, res) {
     }) RETURN n`, 
     parameters 
     )
-    .then(response => { // Change the variable name here
+    .then(response => { 
       res.redirect('/');
       console.log('person added');
     })
@@ -123,27 +153,150 @@ app.post('/getPerson', function(req, res) {
 });
 
 app.post('/modifyAccount', function(req,res){
-  
       const dataNeo = {
           oldEmailParam: currUser.email,
           emailParam: req.body.email,
           passwordParam: req.body.password,
           usernameParam: req.body.username,
-          secondNameParam: req.body.dateOfBirth
+          birthDateParam: req.body.dateOfBirth
       }
       session 
       .run(`MATCH (p:Person {email: $oldEmailParam})
       SET p.email = $emailParam,
       p.password = $passwordParam, 
-      p.userame = $usernameParam, 
+      p.username = $usernameParam, 
       p.birthDate = $birthDateParam
       RETURN p`, dataNeo)
       .then(result =>{
-          res.render('/account')
+        currUser.birthdate = req.body.dateOfBirth;
+        currUser.email = req.body.email;
+        currUser.password = req.body.password;
+        currUser.username = req.body.username;
+        res.redirect('/account');
       })
       .catch (err => {
        console.log(err);
       })
+});
+
+app.post('/addPostPerson', function(req, res) {
+  const email = currUser.email;
+  const bodyPost = req.body.bodyPost;
+  const postedDate = new Date();
+
+  const parameters = {
+    emailParam: email,
+    bodyPostParam: bodyPost,
+    postedDateParam: postedDate
+  };
+
+  session
+  .run(`CREATE(n:Post {
+      email:$emailParam, 
+      bodyPost:$bodyPostParam, 
+      postedDate:$postedDateParam
+  }) RETURN n`, 
+  parameters 
+  )
+  .then(response => { 
+    res.redirect('home');
+    console.log('post added');
+  })
+  .catch((err) =>{
+    console.log(err);
+  })
+});
+
+app.post('/sendFriendRequest', function(req, res){
+  const usernameSearched = req.body.friendName;
+  console.log('hola')
+  if (usernameSearched == "")
+      return;
+
+  session
+  .run(`
+      MATCH (p1:Person {username: $usernameP1}), (p2:Person {username: $usernameP2})
+      CREATE (p1)-[:REQUEST]->(p2)
+      RETURN p1, p2
+  `, {
+      usernameP1: currUser.username,
+      usernameP2: usernameSearched,
+  })
+  .then(result => {
+      res.redirect('/friend');
+      console.log('solicitud enviada')
+  })
+  .catch(error => {
+      console.error('Error establishing friendship:', error);
+      res.render('/friend');
+      
+  })
+});
+
+app.post('/acceptFriend/:id', function(req, res) {
+  session 
+      .run(`MATCH (p1:Person {username: $usernameP1})-[r:REQUEST]->(p2:Person {username: $usernameP2})
+      CREATE (p1)-[:FRIENDS]->(p2), (p2)-[:FRIENDS]->(p1)
+      DELETE r`, {
+      usernameP1 : req.params.id,
+      usernameP2 : currUser.username,
+      })
+      .then(function(result){
+          
+          res.redirect('/friend')
+      })
+      .catch(function(err) {
+          console.log(err);
+          res.status(500).send("Error occurred");
+      });
+});
+
+app.post('/declineFriend/:id', function(req, res) {
+  session 
+      .run(`MATCH (p1:Person {username: $usernameP1})-[r:REQUEST]->(p2:Person {username: $usernameP2})
+      DELETE r`, {
+      usernameP1 : req.params.id,
+      usernameP2 : currUser.username,
+      })
+      .then(function(result){
+          res.redirect('/friend')
+      })
+      .catch(function(err) {
+          console.log(err);
+          res.status(500).send("Error occurred");
+      });
+});
+
+app.post('/removeFriend/:id', function(req, res) {
+  session 
+      .run(`MATCH (p1:Person {username: $usernameP1})-[r:FRIENDS]->(p2:Person {username: $usernameP2})
+      DELETE r`, {
+      usernameP1 : req.params.id,
+      usernameP2 : currUser.username,
+      })
+      .then(function(result){
+          res.redirect('/friend')
+      })
+      .catch(function(err) {
+          console.log(err);
+          res.status(500).send("Error occurred");
+      });
+});
+
+app.post('/cancelRequest/:id', function(req, res) {
+  session 
+      .run(`MATCH (p1:Person {username: $usernameP2})-[r:REQUEST]->(p2:Person {username: $usernameP1})
+      DELETE r`, {
+      usernameP1 : req.params.id,
+      usernameP2 : currUser.username,
+      })
+      .then(function(result){
+          res.redirect('/friend')
+      })
+      .catch(function(err) {
+          console.log(err);
+          res.status(500).send("Error occurred");
+      });
 });
 
 app.listen(3000, () => {

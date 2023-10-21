@@ -16,7 +16,7 @@
             <div class="friendContent">
                 <h1 class="subSectionTittle">Send Friend Request</h1>
 
-                <form class="searchFriendBox">
+                <form action="/sendFriendRequest" method="POST" class="searchFriendBox">
                     <input type="text" name="friendName" placeholder="Enter friend's username">
                     <button type="submit">Send</button>
                 </form>
@@ -25,28 +25,43 @@
             <div class="friendContent">
                 <h1 class="subSectionTittle">Friend Request's</h1>
 
-                <div class="friendBox">
-                    <img src="/image/user.png" class="logoFriendImg">
-                    <p class="friendUsername">Username</p>
-                    <div class="friendRequestButtons">
-                        <button class="rejectButtonFriend">Reject</button>
-                        <button class="acceptButtonFriend">Accept</button>
-                    </div>
-                </div>
+                <% if (friendRequests.length > 0) {%>
+                    <% friendRequests.forEach(user => { %>
+                    
+                        <div class="friendBox">
+                            <img src="/image/user.png" class="logoFriendImg">
+                            <p class="friendUsername"><%= user.get('from').properties.username %></p>
+                            <div class="friendRequestButtons">
+                                <a href="/declineFriend/<%= user.get('from').properties.username %>" > <button class="rejectButtonFriend">Reject</button></a>
+                                <a href="/acceptFriend/<%= user.get('from').properties.username %>" > <button class="acceptButtonFriend">Reject</button></a>
+                            </div>
+                        </div>
 
-                <div class="friendBox">
-                    <img src="/image/user.png" class="logoFriendImg">
-                    <p class="friendUsername">Username</p>
-                    <div class="friendRequestButtons">
-                        <button class="rejectButtonFriend">Reject</button>
-                        <button class="acceptButtonFriend">Accept</button>
-                    </div>
-                </div>
+                    <% }) %>
+                <%} else { %> 
+                    <h4 class="requestsNoUsers">There are no friend requests</h4>
+                <%} %>
 
             </div>
 
             <div class="friendContent">
                 <h1 class="subSectionTittle">Request's Send</h1>
+
+                <% if (requestsList.length > 0) {%>
+                    <% requestsList.forEach(user => { %>
+                    
+                        <div class="friendBox">
+                            <img src="/image/user.png" class="logoFriendImg">
+                            <p class="friendUsername"><%= user.get('from').properties.username %></p>
+                            <div class="requestButtons">
+                                <a href="/cancelRequest/<%= user.get('from').properties.username %>" > <button class="cancelButtonFriend">Cancel</button></a>
+                            </div>
+                        </div>
+
+                    <% }) %>
+                <%} else { %> 
+                    <h4 class="requestsNoUsers">There are no requests</h4>
+                <%} %>
 
                 <div class="friendBox">
                     <img src="/image/user.png" class="logoFriendImg">
@@ -70,19 +85,20 @@
     </div>
 
     <div class="contentFriend">
+
         <h1 class="subSectionTittle">Friend's</h1>
         
-        <div class="friendBox">
-            <img src="/image/user.png" class="logoFriendImg">
-            <p class="friendUsername">Username</p>
-            <button class="rejectButtonFriend">Remove Friend</button>
-        </div>
-
-        <div class="friendBox">
-            <img src="/image/user.png" class="logoFriendImg">
-            <p class="friendUsername">Username</p>
-            <button class="rejectButtonFriend">Remove Friend</button>
-        </div>
+        <% if (friendsList.length > 0) {%>
+            <% friendsList.forEach(user => { %>
+                <div class="friendBox">
+                    <img src="/image/user.png" class="logoFriendImg">
+                    <p class="friendUsername"><%= user.get('from').properties.username %></p>
+                    <a href="/removeFriend/<%= user.get('from').properties.username %>" ><button class="rejectButtonFriend">Remove Friend</button></a> 
+                </div>
+            <% }) %>
+        <%} else { %> 
+            <h2 class="requestsUsers">No tienes amigos</h2>
+        <%} %>
 
         <h1 class="subSectionTittle">You might know</h1>
         
