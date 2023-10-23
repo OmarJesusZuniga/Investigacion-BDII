@@ -44,7 +44,18 @@ app.get('/home', function (req, res) {
   usernameParam : currUser.username,
   })
   .then((result) => {
-      res.render('home', {recommendedList: result.records})
+    var recommendedList = result.records;
+    session
+    .run(`MATCH (from:Person {username: $usernameParam})-[:FRIENDS]-(to:Person)-[:POSTS]->(p:Post)
+    RETURN DISTINCT p`, {
+      usernameParam : currUser.username,
+    })
+    .then((result) => {
+      res.render('home', {recommendedList, postList: result.records})
+    })
+    .catch((err) =>{
+      console.log(err)
+    })
   })
   .catch((err) =>{
     console.log(err)
@@ -165,10 +176,7 @@ app.post('/getPerson', function(req, res) {
         
         res.redirect('/account');
     } else {
-        // Handle case where no matching user is found
         console.log("Invalid user");
-
-        //res.status(401).send("Invalid user");
       }
     })
     .catch(function(err) {
@@ -206,38 +214,30 @@ app.post('/modifyAccount', function(req,res){
 
 app.post('/addPostPerson', function(req, res) {
   const email = currUser.email;
+  const username = currUser.username;
   const bodyPost = req.body.bodyPost;
   const postedDate = new Date();
+  let dateString = postedDate.toString();
 
   const parameters = {
     emailParam: email,
     bodyPostParam: bodyPost,
-    postedDateParam: postedDate
+    usernameParam: username,
+    postedDateParam: dateString
   };
 
   session
-  .run(`CREATE(n:Post {
+  .run(`MATCH (p:Person {email: $emailParam})
+      CREATE (p)-[:POSTS]->(n:Post {
       email:$emailParam, 
-      bodyPost:$bodyPostParam, 
+      bodyPost:$bodyPostParam,
+      username:$usernameParam, 
       postedDate:$postedDateParam
     }) RETURN n`, parameters 
   )
   .then(response => { 
-    session
-    .run(`MATCH (p:Post {email: $emailParam}), (p2:Person {username: $emailParam})
-    WHERE 
-    NOT (p2)-[:POSTS]->(p) 
-    CREATE (p2)-[:POSTS]->(p)
-    RETURN p, p2`, {
-      emailParam: currUser.email,
-    }) 
-    .then(response => { 
       res.redirect('home');
       console.log('post added');
-    })
-    .catch((err) =>{
-      console.log(err);
-    })
   })
   .catch((err) =>{
     console.log(err);
@@ -331,7 +331,6 @@ app.post('/removeFriend/:id', function(req, res) {
 });
 
 app.post('/cancelRequest/:id', function(req, res) {
-  console.log('d')
   session 
       .run(`MATCH (p1:Person {username: $usernameP2})-[r:REQUEST]->(p2:Person {username: $usernameP1})
       DELETE r`, {
@@ -339,7 +338,6 @@ app.post('/cancelRequest/:id', function(req, res) {
       usernameP2 : currUser.username,
       })
       .then(function(result){
-          console.log('hola')
           res.redirect('/friend')
       })
       .catch(function(err) {

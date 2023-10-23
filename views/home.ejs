@@ -18,44 +18,24 @@
             <button>Add a Wave</button>
         </a>
 
-        <div class="postBlock">
-            <div class="userNameBlockPost">
-                <img src="/image/user.png" class="logoFriendImg">
-                <p class="postUsername">Username</p>
-            </div>
-
-            <div class="waveTheme">
-                <p class="waveContent">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In hac habitasse platea dictumst. Sed et hendrerit arcu. Nulla facilisi. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc non risus ac urna consectetur vehicula at in urna. Maecenas id urna non arcu vestibulum eleifend a sit amet justo. Cras auctor justo id quam facilisis, id tincidunt libero euismod. Nunc ultricies interdum nisi id cursus. Fusce hendrerit, ante at lacinia iaculis, justo elit dignissim ligula, ac feugiat nisl justo non neque. Vivamus vitae odio ut libero efficitur lacinia. Quisque tincidunt lacus eget purus venenatis, ac tempor dolor rhoncus.
-                </p>
-            </div>
-            
-        </div>
-
-        <div class="postBlock">
-            <div class="userNameBlockPost">
-                <img src="/image/user.png" class="logoFriendImg">
-                <p class="postUsername">Username</p>
-                <p class="recommendedUser">[ Recommended User ]</p>
-            </div>
-
-            <p>
-                Texto de entry del usuario de arriba.
-            </p>
-            
-        </div>
-
-        <div class="postBlock">
-            <div class="userNameBlockPost">
-                <img src="/image/user.png" class="logoFriendImg">
-                <p class="postUsername">Username</p>
-            </div>
-
-            <p>
-                Texto de entry del usuario de arriba.
-            </p>
-            
-        </div>
+        <% if (postList.length > 0) {%>
+            <% postList.forEach(post => { %>
+                <div class="postBlock">
+                    <div class="userNameBlockPost">
+                        <img src="/image/user.png" class="logoFriendImg">
+                        <p class="postUsername"><%= post.get('p').properties.username %></p>
+                    </div>
+                    <div class="waveTheme">
+                        <p class="waveContent">
+                            <%= post.get('p').properties.bodyPost %>
+                        </p>
+                    </div>
+                    
+                </div>
+            <% }) %>
+        <%} else { %> 
+            <h2 class="requestsUsers">No posts yet</h2>
+        <%} %>
     
     </div>
 
@@ -78,8 +58,6 @@
         <%} %>
 
     </div>
-
-
 
 </body>
 </html>
